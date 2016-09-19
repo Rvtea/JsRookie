@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="color_extract_tool.css">
+    <script type="text/javascript" language="javacript" src="color_extract_tool.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <form method="post" action="http://localhost/test" enctype="multipart/form-data">
+            <p>图片预览</p>
+            <p id="image-preview-before"></p>
+            <input type="file" id="image-file" name="test">
+            <p id="file-info"></p>
+            <ul id="colorDisplay">
+            </ul>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+body {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.main {
+    text-align: left;
+}
