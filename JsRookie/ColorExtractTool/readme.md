@@ -4,6 +4,10 @@ This tool is based on [quantize.js](https://gist.github.com/nrabinowitz/1104622)
 for design. This may work like [Vibrant.js](http://jariz.github.io/vibrant.js/) while I just want to realize a tool by
 myself.
 
+![](https://github.com/Rvtea/JsRookie/blob/master/JsRookie/ColorExtractTool/img/example_1.png)
+
+---
+
 ### Basic Tech Design
 This tool should be designed as single page web application and just use html/css/js file to implement.
 
