@@ -2,8 +2,7 @@ $(function() {
     var fileInput = document.getElementById('image-file');
     var info = document.getElementById('file-info');
     var img_preview = document.getElementById('image-preview');
-    var topColorDisplay = document.getElementById('colorDisplay');
-    var maxcolors = 5; // we only top 5
+    var maxcolors = 5; // currently only support top 5
     fileInput.addEventListener('change', function() {
         if (!fileInput.value) {
             info.innerHTML = '没有选择文件';
@@ -21,7 +20,6 @@ $(function() {
         reader.onload = function(e) {
             // get image rgb info and process
             var img_obj = new Image();
-            var colorInfo = new Map(); // store the rgb info, do not include alpha value now
             img_obj.src = e.target.result;
             img_obj.onload = function() {
                 var canvas = document.createElement('canvas');
@@ -29,10 +27,11 @@ $(function() {
                 var img_width = this.width;
                 var img_height = this.height;
                 // set the size of canvas
-                canvas.width = img_width;
-                canvas.height = img_height;
+                canvas.width = (img_width < 600) ? img_width : 600;
+                canvas.height = img_height * canvas.width / img_width + 50;
+                var eachWidth = canvas.width / maxcolors; // define each color bar width
                 // draw image
-                context.drawImage(this, 0, 0, img_width, img_height);
+                context.drawImage(this, 0, 0, canvas.width, canvas.height - 50);
                 // obtain image data
                 let imageData = context.getImageData(0, 0, img_width, img_height);
                 let imagePixelsRgb = [];
@@ -49,33 +48,31 @@ $(function() {
                 var topFive = topResults.map((x) => rgbToHex(x[0], x[1], x[2]));
                 console.log(topFive);
 
-                // clear all children under display if exist
-                while (topColorDisplay.firstChild) {
-                    topColorDisplay.removeChild(topColorDisplay.firstChild);
-                }
                 // loop to display all
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < maxcolors; i++) {
                     // display the top 5 colors using canvas
                     var canvas1 = document.createElement('canvas');
                     var ctx = canvas1.getContext('2d');
-                    canvas1.width = 100;
-                    canvas1.height = 45;
-                    // place canvas in <li> within <ul> element
-                    let listEle = document.createElement('li');
-                    $('#colorDisplay li').css({
-                        'float': 'left'
-                    }); // do not forget the '' for each side bewteen ":"
-                    topColorDisplay.appendChild(listEle);
-
+                    canvas1.width = eachWidth;
+                    canvas1.height = 50;
                     // set the size of canvas
-                    let horLen = 100,
-                        rectWidth = 75,
-                        rectHeight = 45;
+                    let rectWidth = eachWidth,
+                        rectHeight = 50;
                     // draw image
                     ctx.fillStyle = topFive[i];
-                    ctx.fillRect(0, 0, rectWidth, rectHeight);
-                    listEle.appendChild(canvas1);
+                    ctx.fillRect(0, 0, eachWidth, rectHeight); // 75 for test
+
+                    // display another kind preview with color display under image
+                    // leave 1 line between the image and the color bar
+                    context.drawImage(canvas1, 0, 0, eachWidth, 49, 0 + i * eachWidth, canvas.height - 49, eachWidth, 49);
                 }
+
+                var finalDisplay = document.getElementById('finalDisplay');
+                while (finalDisplay.firstChild) {
+                    finalDisplay.removeChild(finalDisplay.firstChild);
+                }
+                finalDisplay.appendChild(canvas);
+                console.log(eachWidth);
                 console.log("Done.");
             };
             // preview
