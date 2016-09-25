@@ -1,8 +1,10 @@
 # Color Extract Tool
 
-This tool is based on [quantize.js](https://gist.github.com/nrabinowitz/1104622) that will extract color information from photo uploaded and list the top 5 colors
-for design. This may work like [Vibrant.js](http://jariz.github.io/vibrant.js/) while I just want to realize a tool by
-myself.
+### Note: This project has been moved to [ColorExtractTool](https://github.com/Rvtea/ColorExtractTool) for better improvement. This directory under this repo will never update again.
+
+---
+
+This tool is based on [quantize.js](https://gist.github.com/nrabinowitz/1104622) that will extract color information from photo uploaded and list the top 5 colors for design. This may work like [Vibrant.js](http://jariz.github.io/vibrant.js/) while I just want to realize a tool by myself.
 
 <img src="https://github.com/Rvtea/JsRookie/blob/master/JsRookie/ColorExtractTool/img/example_1.png" width = "400" alt="example" align="center" />
 
